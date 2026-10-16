@@ -33,6 +33,31 @@ import {
   Activity,
   ShieldCheck,
 } from "lucide-react"
+
+function ProjectCover({ icon: Icon, label, flow, tone }: { icon: React.ElementType; label: string; flow: string[]; tone: string }) {
+  return (
+    <div className="relative h-40 overflow-hidden border-b border-border bg-muted/30">
+      <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      <div className={`absolute -top-16 -left-10 w-48 h-48 rounded-full blur-3xl opacity-20 ${tone}`} />
+      <div className="relative h-full p-5 flex flex-col justify-between">
+        <div className="flex items-center gap-3">
+          <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-white ${tone}`}>
+            <Icon className="w-5 h-5" />
+          </div>
+          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{label}</span>
+        </div>
+        <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-mono text-muted-foreground">
+          {flow.map((step, i) => (
+            <span key={step} className="flex items-center gap-1.5">
+              <span className="px-2 py-0.5 rounded border border-border bg-background/70">{step}</span>
+              {i < flow.length - 1 && <span>→</span>}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
 import { AIChatbot } from "@/components/ai-chatbot"
 import { Navigation } from "@/components/navigation"
 import { ContactForm } from "@/components/contact-form"
@@ -680,8 +705,8 @@ export default function Portfolio() {
             {/* Project 1: Omni Exam AI (Live Product) */}
             <Card className="group hover:shadow-xl transition-all duration-300 border-border hover:border-emerald-500/50 overflow-hidden flex flex-col justify-between">
               <div>
-                <div className="relative overflow-hidden h-56">
-                  <img src="/project-assessment-portal.jpg" alt="Omni Exam AI - Live Bilingual SaaS" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="relative">
+                  <ProjectCover icon={Brain} label="Production SaaS" flow={["Generate", "Review", "Proctor", "Grade"]} tone="bg-emerald-600" />
                   <div className="absolute top-4 right-4 flex items-center gap-2">
                     <Badge className="bg-emerald-600 text-white font-mono text-xs flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
@@ -752,8 +777,8 @@ export default function Portfolio() {
             {/* Project 2: Agent Evaluation Suite (Open Source) */}
             <Card className="group hover:shadow-xl transition-all duration-300 border-border hover:border-accent/50 overflow-hidden flex flex-col justify-between">
               <div>
-                <div className="relative overflow-hidden h-56">
-                  <img src="/project-agent-eval.jpg" alt="Agent Evaluation Suite (Open Source)" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="relative">
+                  <ProjectCover icon={Network} label="Evaluation Framework" flow={["Trace", "Score", "Regress", "Gate"]} tone="bg-accent" />
                   <div className="absolute top-4 right-4">
                     <Badge className="bg-accent text-accent-foreground font-mono text-xs">
                       Open Source Framework
@@ -818,8 +843,8 @@ export default function Portfolio() {
             {/* Project 3: Agentic Job Matcher (AI-Resume-Job-Matching-Agent) */}
             <Card className="group hover:shadow-xl transition-all duration-300 border-border hover:border-primary/50 overflow-hidden flex flex-col justify-between">
               <div>
-                <div className="relative overflow-hidden h-56">
-                  <img src="/project-resume-match.jpg" alt="Agentic Job Matcher - AI Resume & Job Matching Agent" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="relative">
+                  <ProjectCover icon={Bot} label="Agentic Matching" flow={["Parse", "Embed", "Match", "Rank"]} tone="bg-primary" />
                   <div className="absolute top-4 right-4">
                     <Badge className="bg-primary text-primary-foreground font-mono text-xs">
                       Open Source / GitHub Repo
@@ -893,8 +918,8 @@ export default function Portfolio() {
             {/* Project 4: Customer Support RAG Assistant */}
             <Card className="group hover:shadow-xl transition-all duration-300 border-border hover:border-secondary/50 overflow-hidden flex flex-col justify-between">
               <div>
-                <div className="relative overflow-hidden h-56">
-                  <img src="/project-customer-support-rag.jpg" alt="Customer Support RAG Assistant" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="relative">
+                  <ProjectCover icon={MessageCircle} label="Enterprise RAG" flow={["Ingest", "Retrieve", "Answer", "Escalate"]} tone="bg-secondary" />
                   <div className="absolute top-4 right-4">
                     <Badge className="bg-secondary text-secondary-foreground font-mono text-xs">
                       Enterprise RAG
